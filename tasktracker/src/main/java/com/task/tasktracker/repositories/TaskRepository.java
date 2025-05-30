@@ -11,6 +11,6 @@ import com.task.tasktracker.domain.entities.TaskEntity;
 
 @Repository
 public interface TaskRepository extends JpaRepository<TaskEntity, UUID> {
-    List<TaskEntity> findByTaskListId(UUID taskListId);
-    Optional<TaskEntity> findByTaskListIdAndId(UUID taskListId, UUID id);
+    List<TaskEntity> findByTaskListEntityId(UUID taskListEntityId);
+    Optional<TaskEntity> findByTaskListEntityIdAndId(UUID taskListEntityId, UUID id);
 }
