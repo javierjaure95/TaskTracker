@@ -27,7 +27,7 @@ public class TaskListEntity {
     @Column(name = "description")
     private String description;
 
-    @OneToMany(mappedBy = "taskList", cascade = {
+    @OneToMany(mappedBy = "taskListEntity", cascade = {
             CascadeType.REMOVE, CascadeType.PERSIST
     })
     private List<TaskEntity> tasksEntity;
