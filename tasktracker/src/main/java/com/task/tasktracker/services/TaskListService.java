@@ -8,8 +8,8 @@ import com.task.tasktracker.domain.entities.TaskListEntity;
 
 public interface TaskListService {
     List<TaskListEntity> listTaskLists();
-    TaskListEntity createTaskList(TaskListEntity taskListEntity);
+    TaskListEntity createTaskList(TaskListEntity taskList);
     Optional<TaskListEntity> getTaskList(UUID id);
-    TaskListEntity updateTaskList(UUID taskListId, TaskListEntity taskListEntity);
-    void deleteTaskList(UUID taskListEntityId);
+    TaskListEntity updateTaskList(UUID taskListId, TaskListEntity taskList);
+    void deleteTaskList(UUID taskListId);
 }

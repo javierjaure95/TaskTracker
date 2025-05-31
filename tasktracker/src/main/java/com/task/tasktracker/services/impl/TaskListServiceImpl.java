@@ -28,19 +28,19 @@ public class TaskListServiceImpl implements TaskListService {
 
     
     @Override
-    public TaskListEntity createTaskList(TaskListEntity taskListEntity) {
-        if(null != taskListEntity.getId()) {
+    public TaskListEntity createTaskList(TaskListEntity taskList) {
+        if(null != taskList.getId()) {
             throw new IllegalArgumentException("Task list already has an ID!");
         }
-        if(null == taskListEntity.getTitle() || taskListEntity.getTitle().isBlank()) {
+        if(null == taskList.getTitle() || taskList.getTitle().isBlank()) {
             throw new IllegalArgumentException("Task list title must be present!");
         }
 
         LocalDateTime now = LocalDateTime.now();
         return taskListRepository.save(new TaskListEntity(
                 null,
-                taskListEntity.getTitle(),
-                taskListEntity.getDescription(),
+                taskList.getTitle(),
+                taskList.getDescription(),
                 null,
                 now,
                 now
@@ -52,20 +52,20 @@ public class TaskListServiceImpl implements TaskListService {
     }
 
     @Override
-    public TaskListEntity updateTaskList(UUID taskListEntityId, TaskListEntity taskListEntity) {
-        if(null == taskListEntity.getId()) {
+    public TaskListEntity updateTaskList(UUID taskListId, TaskListEntity taskList) {
+        if(null == taskList.getId()) {
             throw new IllegalArgumentException("Task list must have an ID");
         }
 
-        if(!Objects.equals(taskListEntity.getId(), taskListEntityId)) {
+        if(!Objects.equals(taskList.getId(), taskListId)) {
             throw new IllegalArgumentException("Attempting to change task list ID, this is not permitted!");
         }
 
-        TaskListEntity existingTaskList = taskListRepository.findById(taskListEntityId).orElseThrow(() ->
+        TaskListEntity existingTaskList = taskListRepository.findById(taskListId).orElseThrow(() ->
                 new IllegalArgumentException("Task list not found!"));
 
-        existingTaskList.setTitle(taskListEntity.getTitle());
-        existingTaskList.setDescription(taskListEntity.getDescription());
+        existingTaskList.setTitle(taskList.getTitle());
+        existingTaskList.setDescription(taskList.getDescription());
         existingTaskList.setUpdatedAt(LocalDateTime.now());
         return taskListRepository.save(existingTaskList);
     }

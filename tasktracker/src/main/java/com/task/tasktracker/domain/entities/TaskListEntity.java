@@ -27,10 +27,10 @@ public class TaskListEntity {
     @Column(name = "description")
     private String description;
 
-    @OneToMany(mappedBy = "taskListEntity", cascade = {
+    @OneToMany(mappedBy = "taskList", cascade = {
             CascadeType.REMOVE, CascadeType.PERSIST
     })
-    private List<TaskEntity> tasksEntity;
+    private List<TaskEntity> tasks;
 
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;

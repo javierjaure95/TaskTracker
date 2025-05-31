@@ -42,11 +42,11 @@ public class TaskListMapperImpl implements TaskListMapper {
                 taskListEntity.getId(),
                 taskListEntity.getTitle(),
                 taskListEntity.getDescription(),
-                Optional.ofNullable(taskListEntity.getTasksEntity())
+                Optional.ofNullable(taskListEntity.getTasks())
                         .map(List::size)
                         .orElse(0),
-                calculateTaskListProgress(taskListEntity.getTasksEntity()),
-                Optional.ofNullable(taskListEntity.getTasksEntity())
+                calculateTaskListProgress(taskListEntity.getTasks()),
+                Optional.ofNullable(taskListEntity.getTasks())
                         .map(tasks ->
                                 tasks.stream().map(taskMapper::toDto).toList()
                         ).orElse(null)
