@@ -5,19 +5,26 @@ import { TaskListFormComponent } from '../../components/create-task-list-form/cr
 import { Router } from '@angular/router';
 import { TaskListService } from '../../../../services/task-list.service';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-task-list-page',
   standalone: true,
-  imports: [CommonModule, TaskListFormComponent, HttpClientModule],
+  imports: [CommonModule, TaskListFormComponent, HttpClientModule, FormsModule],
   providers: [TaskListService],
-  templateUrl: './task-list-page.component.html'
+  templateUrl: './task-list-page.component.html',
 })
 export class TaskListPageComponent implements OnInit {
   taskLists: TaskList[] = [];
   showCreateForm = false;
+  editingListId: string | null = null;
+  editTitle: string = '';
+  editDescription: string = '';
 
-  constructor(private router: Router, private taskListService: TaskListService) {}
+  constructor(
+    private router: Router,
+    private taskListService: TaskListService
+  ) {}
 
   ngOnInit() {
     this.loadTaskLists();
@@ -30,7 +37,7 @@ export class TaskListPageComponent implements OnInit {
       },
       error: (err) => {
         console.error('Error loading task lists:', err);
-      }
+      },
     });
   }
 
@@ -43,15 +50,76 @@ export class TaskListPageComponent implements OnInit {
       next: (createdTaskList) => {
         console.log('Task List creado:', createdTaskList);
         this.showCreateForm = false;
-        this.loadTaskLists(); 
+        this.loadTaskLists();
       },
       error: (err) => {
         console.error('Error creando task list:', err);
-      }
+      },
     });
   }
 
   goToTaskListDetail(id: string) {
     this.router.navigate(['/tasks', id]);
+  }
+
+  onDeleteTaskList(id: string) {
+    this.taskListService.deleteTaskList(id).subscribe({
+      next: () => {
+        this.taskLists = this.taskLists.filter((list) => list.id !== id);
+      },
+      error: (err) => {
+        console.error('Error deleting task list:', err);
+      },
+    });
+  }
+
+  editTaskList(updatedList: TaskList) {
+    this.taskListService.updateTaskList(updatedList.id, updatedList).subscribe({
+      next: (updated) => {
+        const index = this.taskLists.findIndex(
+          (list) => list.id === updated.id
+        );
+        if (index !== -1) {
+          this.taskLists[index] = updated;
+        }
+      },
+      error: (err) => {
+        console.error('Error updating task list:', err);
+      },
+    });
+  }
+
+  startEditing(list: TaskList, event: MouseEvent) {
+    event.stopPropagation(); 
+    this.editingListId = list.id;
+    this.editTitle = list.title;
+    this.editDescription = list.description;
+  }
+
+  saveEdit(list: TaskList) {
+    if (!this.editTitle.trim() || !this.editDescription.trim()) {
+      return; 
+    }
+
+    const updatedList = {
+      ...list,
+      title: this.editTitle,
+      description: this.editDescription,
+    };
+
+    this.taskListService.updateTaskList(updatedList.id, updatedList).subscribe({
+      next: (updated) => {
+        const index = this.taskLists.findIndex((l) => l.id === updated.id);
+        if (index !== -1) this.taskLists[index] = updated;
+        this.editingListId = null;
+      },
+      error: (err) => {
+        console.error('Error updating task list:', err);
+      },
+    });
+  }
+
+  cancelEdit() {
+    this.editingListId = null;
   }
 }

@@ -12,34 +12,94 @@
       (create)="onCreateTaskList($event)"
     ></app-task-list-form>
   </div>
+
   <div *ngIf="!showCreateForm">
     <div *ngIf="taskLists.length === 0" class="text-center text-muted">
       No task lists yet.
     </div>
 
-    <div
-      *ngFor="let list of taskLists"
-      class="card mb-3"
-      style="cursor: pointer"
-      (click)="goToTaskListDetail(list.id)"
-    >
-      <div class="card-body">
-        <h5 class="card-title">{{ list.title }}</h5>
-        <p class="card-text">{{ list.description }}</p>
-
-        <div class="progress mb-2" *ngIf="list.count > 0">
+    <div *ngFor="let list of taskLists" class="card mb-3 position-relative">
+      <div
+        class="card-body"
+        (click)="goToTaskListDetail(list.id)"
+        style="cursor: pointer"
+      >
+        <div class="position-absolute top-0 end-0 m-2">
           <div
-            class="progress-bar"
-            role="progressbar"
-            [style.width.%]="list.progress"
-            [attr.aria-valuenow]="list.progress"
-            aria-valuemin="0"
-            aria-valuemax="100"
+            *ngIf="editingListId !== list.id"
+            class="d-flex justify-content-end gap-2"
           >
-            {{ list.progress }}%
+            <button
+              class="btn btn-sm btn-outline-primary"
+              (click)="startEditing(list, $event)"
+              title="Edit"
+            >
+              <i class="bi bi-pencil"></i>
+            </button>
+            <button
+              class="btn btn-sm btn-outline-danger"
+              (click)="onDeleteTaskList(list.id); $event.stopPropagation()"
+              title="Delete"
+            >
+              <i class="bi bi-trash"></i>
+            </button>
           </div>
         </div>
-        <small class="text-muted">{{ list.count }} tasks</small>
+
+        <div *ngIf="editingListId !== list.id; else editForm">
+          <h5 class="card-title">{{ list.title }}</h5>
+          <p class="card-text">{{ list.description }}</p>
+
+          <div class="progress mb-2" *ngIf="list.count > 0">
+            <div
+              class="progress-bar"
+              role="progressbar"
+              [style.width.%]="list.progress"
+              [attr.aria-valuenow]="list.progress"
+              aria-valuemin="0"
+              aria-valuemax="100"
+            >
+              {{ list.progress }}%
+            </div>
+          </div>
+          <small class="text-muted">{{ list.count }} tasks</small>
+        </div>
+
+        <ng-template #editForm>
+          <form
+            (ngSubmit)="saveEdit(list)"
+            class="mb-2"
+            (click)="$event.stopPropagation()"
+          >
+            <input
+              type="text"
+              [(ngModel)]="editTitle"
+              name="title"
+              required
+              class="form-control mb-1"
+            />
+            <textarea
+              [(ngModel)]="editDescription"
+              name="description"
+              required
+              class="form-control mb-1"
+            ></textarea>
+            <button
+              type="submit"
+              class="btn btn-sm btn-success me-2"
+              (click)="$event.stopPropagation()"
+            >
+              Save
+            </button>
+            <button
+              type="button"
+              class="btn btn-sm btn-secondary"
+              (click)="cancelEdit(); $event.stopPropagation()"
+            >
+              Cancel
+            </button>
+          </form>
+        </ng-template>
       </div>
     </div>
   </div>
