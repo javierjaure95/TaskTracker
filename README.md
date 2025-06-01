@@ -18,7 +18,7 @@ El proyecto esta en desarrollo y se le agregaran nuevas funcionalidades
    ```
 2. Una vez dentro de la carpeta:
    ```bash
-   cd tasktracker
+   cd TaskTracker/tasktracker
    ```
 3. Crear y levantar los contenedores Docker
    ```bash
