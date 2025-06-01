@@ -6,11 +6,12 @@ import { Task } from '../../../../models/task.model';
 import { MOCK_TASK_LISTS, MOCK_TASKS } from '../../../../mocks/mock-task-data';
 import { CreateTaskFormComponent } from '../../components/create-task-form/create-task-form.component';
 import { OnInit } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-task-list-detail-page',
   standalone: true,
-  imports: [CommonModule, CreateTaskFormComponent],
+  imports: [CommonModule, CreateTaskFormComponent, HttpClientModule],
   templateUrl: './task-list-detail-page.component.html'
 })
 export class TaskListDetailPageComponent {

@@ -7,7 +7,7 @@ import { TaskList } from '../models/task-list.model';
   providedIn: 'root'
 })
 export class TaskListService {
-  private baseUrl = '/task-lists';
+  private baseUrl = 'http://localhost:8080/task-lists';
 
   constructor(private http: HttpClient) {}
 
