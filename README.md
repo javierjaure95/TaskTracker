@@ -3,6 +3,7 @@
 ## Descripción
 Este proyecto es una aplicación para gestionar tareas, donde puedes crear listas de tareas y controlar el progreso de cada una.
 Fue desarrollado como una introducción práctica a Spring Boot, enfocándome en la creación de APIs REST y la gestión de datos.
+El proyecto esta en desarrollo y se le agregaran nuevas funcionalidades
 
 ## Tecnologías Utilizadas
 - Lenguaje: Java 21
