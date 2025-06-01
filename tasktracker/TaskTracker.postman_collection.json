@@ -1,0 +1,412 @@
+{
+	"info": {
+		"_postman_id": "97d72d4f-0717-45a8-b71c-c109c950db35",
+		"name": "TaskTracker",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "45345911",
+		"_collection_link": "https://javier-5419377.postman.co/workspace/Javier's-Workspace~458fe5ab-fb84-4c08-8a32-b3897f9763dc/collection/45345911-97d72d4f-0717-45a8-b71c-c109c950db35?action=share&source=collection_link&creator=45345911"
+	},
+	"item": [
+		{
+			"name": "Task-list",
+			"item": [
+				{
+					"name": "GET task-list",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200 or 204\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 204]);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/task-lists",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"task-lists"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST task-list",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200 or 400\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 400]);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"New Task List\",\r\n    \"description\": \"New\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/task-lists",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"task-lists"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET task-list by uuid",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200 or 204\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 204]);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/task-lists/f7f63de6-b88e-4e8a-837a-d4e3973ae8b5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"task-lists",
+								"f7f63de6-b88e-4e8a-837a-d4e3973ae8b5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT task-list",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200 or 400\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 400]);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"f7f63de6-b88e-4e8a-837a-d4e3973ae8b5\",\r\n    \"title\": \"New Task List\",\r\n    \"description\": \"New\",\r\n    \"count\": 2,\r\n    \"progress\": \"NaN\",\r\n    \"tasks\": []\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/task-lists/f7f63de6-b88e-4e8a-837a-d4e3973ae8b5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"task-lists",
+								"f7f63de6-b88e-4e8a-837a-d4e3973ae8b5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE task-list",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/task-lists/81e24975-9d57-4dfe-bb0b-36c9074d4519",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"task-lists",
+								"81e24975-9d57-4dfe-bb0b-36c9074d4519"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Task",
+			"item": [
+				{
+					"name": "GET task by task-list",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200 or 204\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 204]);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/task-lists/f7f63de6-b88e-4e8a-837a-d4e3973ae8b5/tasks",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"task-lists",
+								"f7f63de6-b88e-4e8a-837a-d4e3973ae8b5",
+								"tasks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST task",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200 or 400\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 400]);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"New Task List\",\r\n    \"description\": \"New\",\r\n    \"dueDate\": \"2024-11-01T09:00:00\",\r\n    \"priority\": \"HIGH\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/task-lists/f7f63de6-b88e-4e8a-837a-d4e3973ae8b5/tasks",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"task-lists",
+								"f7f63de6-b88e-4e8a-837a-d4e3973ae8b5",
+								"tasks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET task by uuid",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200 or 204\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 204]);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/task-lists/f7f63de6-b88e-4e8a-837a-d4e3973ae8b5/tasks/56790342-891c-46e1-bb24-94417d31a144",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"task-lists",
+								"f7f63de6-b88e-4e8a-837a-d4e3973ae8b5",
+								"tasks",
+								"56790342-891c-46e1-bb24-94417d31a144"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT task",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200 or 400\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 400]);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"56790342-891c-46e1-bb24-94417d31a144\",\r\n    \"title\": \"New Task Lis\",\r\n    \"description\": \"New\",\r\n    \"dueDate\": \"2024-11-01T09:00:00\",\r\n    \"priority\": \"HIGH\",\r\n    \"status\": \"CLOSED\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/task-lists/f7f63de6-b88e-4e8a-837a-d4e3973ae8b5/tasks/56790342-891c-46e1-bb24-94417d31a144",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"task-lists",
+								"f7f63de6-b88e-4e8a-837a-d4e3973ae8b5",
+								"tasks",
+								"56790342-891c-46e1-bb24-94417d31a144"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE task",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/task-lists/1a0e755f-d788-49de-a9b0-8cc83a0035d0/tasks/4b06d6bd-68be-474f-9591-44bd06b0b568",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"task-lists",
+								"1a0e755f-d788-49de-a9b0-8cc83a0035d0",
+								"tasks",
+								"4b06d6bd-68be-474f-9591-44bd06b0b568"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

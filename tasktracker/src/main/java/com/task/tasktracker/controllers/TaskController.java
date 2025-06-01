@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,29 +33,39 @@ public class TaskController {
     }
 
     @GetMapping
-    public List<TaskDto> listTasks(@PathVariable("task_list_id") UUID taskListId) {
-        return taskService.listTasks(taskListId)
+    public ResponseEntity<List<TaskDto>> listTasks(@PathVariable("task_list_id") UUID taskListId) {
+        List<TaskDto> tasks = taskService.listTasks(taskListId)
                 .stream()
                 .map(taskMapper::toDto)
                 .toList();
+
+        if (tasks.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.ok(tasks);
+        }
     }
 
     @PostMapping
-    public TaskDto createTask(
+    public ResponseEntity<TaskDto> createTask(
             @PathVariable("task_list_id") UUID taskListId,
             @RequestBody TaskDto taskDto) {
         TaskEntity createdTask = taskService.createTask(
                 taskListId,
                 taskMapper.fromDto(taskDto));
-        return taskMapper.toDto(createdTask);
+        TaskDto result = taskMapper.toDto(createdTask);
+        return ResponseEntity.status(HttpStatus.CREATED).body(result);
+
     }
 
     @GetMapping("/{task_id}")
-    public Optional<TaskDto> getTask(
+    public ResponseEntity<TaskDto> getTask(
             @PathVariable("task_list_id") UUID taskListId,
             @PathVariable("task_id") UUID taskId) {
         return taskService.getTask(taskListId, taskId)
-                .map(taskMapper::toDto);
+                .map(taskMapper::toDto)
+                .map(ResponseEntity::ok) 
+                .orElseGet(() -> ResponseEntity.noContent().build()); 
     }
 
     @PutMapping(path = "/{task_id}")
