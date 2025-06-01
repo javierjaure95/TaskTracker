@@ -3,19 +3,26 @@
 
   <div class="d-flex justify-content-end mb-3">
     <button class="btn btn-primary" (click)="toggleCreateForm()">
-      {{ showCreateForm ? 'Cancel' : 'Create Task List' }}
+      {{ showCreateForm ? "Cancel" : "Create Task List" }}
     </button>
   </div>
 
   <div *ngIf="showCreateForm" class="mb-4">
-    <app-task-list-form (create)="onCreateTaskList($event)"></app-task-list-form>
+    <app-task-list-form
+      (create)="onCreateTaskList($event)"
+    ></app-task-list-form>
   </div>
   <div *ngIf="!showCreateForm">
     <div *ngIf="taskLists.length === 0" class="text-center text-muted">
       No task lists yet.
     </div>
 
-    <div *ngFor="let list of taskLists" class="card mb-3">
+    <div
+      *ngFor="let list of taskLists"
+      class="card mb-3"
+      style="cursor: pointer"
+      (click)="goToTaskListDetail(list.id)"
+    >
       <div class="card-body">
         <h5 class="card-title">{{ list.title }}</h5>
         <p class="card-text">{{ list.description }}</p>

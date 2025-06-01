@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { TaskList } from '../../../../models/task-list.model';
 import { MOCK_TASK_LISTS } from '../../../../mocks/mock-task-data';
 import { TaskListFormComponent } from '../../components/create-task-list-form/create-task-list-form.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-task-list-page',
@@ -16,6 +17,8 @@ export class TaskListPageComponent {
   
   showCreateForm = false;
 
+  constructor(private router: Router) {}
+
   toggleCreateForm() {
     this.showCreateForm = !this.showCreateForm;
   }
@@ -23,6 +26,10 @@ export class TaskListPageComponent {
   onCreateTaskList(data: { title: string; description: string }) {
     console.log('Datos recibidos para crear Task List:', data);
     this.showCreateForm = false;
+}
+
+goToTaskListDetail(id: string) {
+  this.router.navigate(['/tasks', id]);
 }
 
 }
