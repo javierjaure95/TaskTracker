@@ -16,7 +16,7 @@ export class TaskListFormComponent {
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
       title: ['', [Validators.required, Validators.maxLength(255)]],
-      description: ['', Validators.maxLength(255)],
+      description: ['',[Validators.required, Validators.maxLength(255)]],
     });
   }
 

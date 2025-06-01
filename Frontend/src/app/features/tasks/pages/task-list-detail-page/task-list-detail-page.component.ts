@@ -10,7 +10,8 @@ import { TaskListService } from '../../../../services/task-list.service';
 import { TaskCreateDto } from '../../../../models/task.model';
 import { TaskTableComponent } from '../../components/task-table/task-table.component';
 import { TaskStatus } from '../../../../models/enums/task.enums';
-
+import { Subscription } from 'rxjs';
+import { DarkModeService } from '../../../../services/dark-mode.service';
 @Component({
   selector: 'app-task-list-detail-page',
   standalone: true,
@@ -31,11 +32,15 @@ export class TaskListDetailPageComponent implements OnInit {
   isLoaded = false;
   taskBeingEdited: Task | null = null;
 
+  darkMode = false;
+  private subscription!: Subscription;
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private taskService: TaskService,
-    private taskListService: TaskListService
+    private taskListService: TaskListService,
+    private darkModeService: DarkModeService
   ) {}
 
   ngOnInit() {
@@ -43,16 +48,25 @@ export class TaskListDetailPageComponent implements OnInit {
 
     this.taskListService.getTaskListById(this.taskListId).subscribe({
       next: (list) => (this.taskList = list),
-      error: (err) => console.error('Error loading task list:', err),
+      error: (err) => console.error('Error al cargar la Lista de Tareas:', err),
     });
 
     this.taskService.getTasks(this.taskListId).subscribe({
       next: (tasks) => {
         (this.tasks = tasks), (this.isLoaded = true);
       },
-      error: (err) => console.error('Error loading tasks:', err),
+      error: (err) => console.error('Error al cargar las Tareas:', err),
+    });
+
+    this.subscription = this.darkModeService.darkMode$.subscribe((mode) => {
+      this.darkMode = mode;
     });
   }
+
+    ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+
 
   goBack() {
     this.router.navigate(['/tasks']);
@@ -75,7 +89,7 @@ export class TaskListDetailPageComponent implements OnInit {
         }
       },
       error: (err) => {
-        console.error('Failed to delete task', err);
+        console.error('Error al borrar la Tarea:', err);
       },
     });
   }
@@ -95,7 +109,7 @@ export class TaskListDetailPageComponent implements OnInit {
           }
         },
         error: (err) => {
-          console.error('Failed to update task', err);
+          console.error('Error al actualizar la Tarea:', err);
         },
       });
   }
@@ -145,7 +159,7 @@ export class TaskListDetailPageComponent implements OnInit {
             this.showCreateForm = false;
           },
           error: (err) => {
-            console.error('Failed to update task', err);
+            console.error('Error al actualizar la Tarea:', err);
           },
         });
     } else {
@@ -155,11 +169,11 @@ export class TaskListDetailPageComponent implements OnInit {
           this.showCreateForm = false;
           if (this.taskList) {
             this.taskList.progress = this.calculateProgress(this.tasks);
-            this.taskList.count = this.tasks.length; 
+            this.taskList.count = this.tasks.length;
           }
         },
         error: (err) => {
-          console.error('Error creating task:', err);
+          console.error('Error al crear la Tarea:', err);
         },
       });
     }

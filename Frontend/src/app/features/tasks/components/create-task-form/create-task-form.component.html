@@ -4,7 +4,7 @@
   class="border p-4 rounded shadow-sm bg-light"
 >
   <div class="mb-3">
-    <label for="title" class="form-label">Title</label>
+    <label for="title" class="form-label">Título</label>
     <input
       id="title"
       type="text"
@@ -15,7 +15,7 @@
   </div>
 
   <div class="mb-3">
-    <label for="description" class="form-label">Description</label>
+    <label for="description" class="form-label">Descripción</label>
     <textarea
       id="description"
       class="form-control"
@@ -25,7 +25,7 @@
   </div>
 
   <div class="mb-3">
-    <label for="dueDate" class="form-label">Due Date</label>
+    <label for="dueDate" class="form-label">Fecha Limite</label>
     <input
       id="dueDate"
       type="date"
@@ -35,18 +35,18 @@
   </div>
 
   <div class="mb-3">
-    <label class="form-label">Priority</label>
+    <label class="form-label">Prioridad</label>
     <div class="d-flex gap-2">
       <div class="form-check" *ngFor="let p of ['LOW', 'MEDIUM', 'HIGH']">
         <input
-          class="form-check-input"
+          class="form-check-input border border-dark"
           type="radio"
           [id]="'priority-' + p"
           formControlName="priority"
           [value]="p"
         />
         <label class="form-check-label" [for]="'priority-' + p">
-          {{ p }}
+          {{ priorityLabels[p] }}
         </label>
       </div>
     </div>
@@ -54,7 +54,7 @@
 
   <div class="d-flex justify-content-end mt-4">
     <button type="submit" class="btn btn-success" [disabled]="taskForm.invalid">
-      {{ isEditMode ? "Update Task" : "Create Task" }}
+      {{ isEditMode ? "Actualizar Tarea" : "Crear Tarea" }}
     </button>
   </div>
 </form>

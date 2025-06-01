@@ -1,1 +1,54 @@
 /* You can add global styles to this file, and also import other style files */
+.card-hover {
+  transition: background-color 0.2s ease;
+}
+
+.card-hover:hover {
+  background-color: #d6d8db;
+}
+
+body.dark-mode .card-hover:hover {
+  background-color: #2a2a2a; 
+}
+
+body.dark-mode {
+  background-color: #121212;
+  color: #e0e0e0;
+}
+
+body.dark-mode .card {
+  background-color: #1e1e1e;
+  color: #e0e0e0;
+}
+
+body.dark-mode .btn-primary {
+  background-color: #bb86fc;
+  border-color: #bb86fc;
+}
+
+body.dark-mode .form-control {
+  background-color: #333;
+  color: #e0e0e0;
+  border-color: #555;
+}
+
+body.dark-mode .btn-primary,
+body.dark-mode .btn-primary:focus,
+body.dark-mode .btn-primary:active,
+body.dark-mode .btn-primary:hover {
+  background-color: #bb86fc !important;
+  border-color: #bb86fc !important;
+  box-shadow: none !important; 
+  color: #121212 !important;  
+}
+
+body.dark-mode .text-muted {
+  color: #adb5bd !important; 
+}
+
+body.dark-mode .bg-light {
+  background-color: #2c2c2c !important; 
+  color: #e0e0e0; 
+  border-color: #444;
+}
+

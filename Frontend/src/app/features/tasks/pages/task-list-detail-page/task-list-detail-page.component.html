@@ -1,6 +1,6 @@
 <div class="container my-4">
   <button class="btn btn-secondary mb-3" (click)="goBack()">
-    ← Back to Task Lists
+    ← Volver a la Lista de Tareas
   </button>
 
   <div *ngIf="taskList">
@@ -28,8 +28,8 @@
     </div>
 
     <div class="d-flex justify-content-end mb-3">
-      <button class="btn btn-primary" (click)="toggleCreateForm()">
-        {{ showCreateForm ? "Cancel" : "Create Task" }}
+      <button class="btn btn-primary w-100" (click)="toggleCreateForm()">
+        {{ showCreateForm ? "Cancelar" : "Crear Tarea" }}
       </button>
     </div>
 
@@ -43,7 +43,7 @@
         *ngIf="tasks.length === 0 && !showCreateForm"
         class="text-center text-muted"
       >
-        No tasks available.
+        Sin Tareas
       </div>
       <div *ngIf="tasks.length !== 0 && !showCreateForm">
         <app-task-table
@@ -52,12 +52,13 @@
           (editTask)="onClickEdit($event)"
           (deleteTask)="onDeleteTask($event)"
           (toggleStatus)="onToggleStatus($event)"
+          [darkMode]="darkMode"
         ></app-task-table>
       </div>
     </div>
 
     <div *ngIf="!taskList && !showCreateForm" class="alert alert-danger">
-      Task list not found.
+      No se Encontro la Lista de Tareas
     </div>
   </div>
 </div>

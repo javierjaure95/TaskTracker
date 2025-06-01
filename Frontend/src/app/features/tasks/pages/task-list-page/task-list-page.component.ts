@@ -37,7 +37,7 @@ export class TaskListPageComponent implements OnInit {
         this.taskLists = lists;
       },
       error: (err) => {
-        console.error('Error loading task lists:', err);
+        console.error('Error al cargar la Lista de Tareas:', err);
       },
     });
   }
@@ -49,12 +49,11 @@ export class TaskListPageComponent implements OnInit {
   onCreateTaskList(data: TaskListCreateDto) {
     this.taskListService.createTaskList(data).subscribe({
       next: (createdTaskList) => {
-        console.log('Task List creado:', createdTaskList);
         this.showCreateForm = false;
         this.loadTaskLists();
       },
       error: (err) => {
-        console.error('Error creando task list:', err);
+        console.error('Error creando la Lista de Tareas:', err);
       },
     });
   }
@@ -69,7 +68,7 @@ export class TaskListPageComponent implements OnInit {
         this.taskLists = this.taskLists.filter((list) => list.id !== id);
       },
       error: (err) => {
-        console.error('Error deleting task list:', err);
+        console.error('Error borrando la Lista de Tareas:', err);
       },
     });
   }
@@ -85,7 +84,7 @@ export class TaskListPageComponent implements OnInit {
         }
       },
       error: (err) => {
-        console.error('Error updating task list:', err);
+        console.error('Error actualizando la Lista de Tareas::', err);
       },
     });
   }
@@ -115,7 +114,7 @@ export class TaskListPageComponent implements OnInit {
         this.editingListId = null;
       },
       error: (err) => {
-        console.error('Error updating task list:', err);
+        console.error('Error actualizando la Lista de Tareas:', err);
       },
     });
   }

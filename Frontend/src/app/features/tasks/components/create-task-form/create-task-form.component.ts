@@ -27,6 +27,12 @@ export class TaskFormComponent implements OnChanges {
   @Input() initialData: Task | null = null;
   @Output() submitTask = new EventEmitter<TaskCreateDto>();
 
+  priorityLabels: { [key: string]: string } = {
+    LOW: 'BAJA',
+    MEDIUM: 'MEDIA',
+    HIGH: 'ALTA',
+  };
+
   taskForm: FormGroup;
   isEditMode = false;
 

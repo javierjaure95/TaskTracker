@@ -12,10 +12,17 @@ import { TaskStatus } from '../../../../models/enums/task.enums';
 export class TaskTableComponent {
   @Input() tasks: Task[] = [];
   @Input() showCreateForm: boolean = false;
+  @Input() darkMode: boolean = false;
   @Output() editTask = new EventEmitter<Task>();
   @Output() deleteTask = new EventEmitter<string>();
 
   @Output() toggleStatus = new EventEmitter<Task>();
+
+  priorityLabels: { [key: string]: string } = {
+    LOW: 'BAJA',
+    MEDIUM: 'MEDIA',
+    HIGH: 'ALTA',
+  };
 
   onToggle(task: Task) {
     const updatedTask: Task = {

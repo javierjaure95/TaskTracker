@@ -1,1 +1,13 @@
+<button
+  class="btn btn-secondary position-fixed top-0 end-0 m-3 rounded-circle"
+  style="width: 3rem; height: 3rem"
+  (click)="toggleDarkMode()"
+  aria-label="Toggle dark mode"
+>
+  <i
+    class="bi"
+    [class.bi-sun-fill]="darkMode"
+    [class.bi-moon-fill]="!darkMode"
+  ></i>
+</button>
 <router-outlet />

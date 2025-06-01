@@ -1,9 +1,9 @@
 <div class="container mt-4">
-  <h1 class="text-center mb-4">Task List</h1>
+  <h1 class="text-center mb-4">Lista de Tareas</h1>
 
   <div class="d-flex justify-content-end mb-3">
-    <button class="btn btn-primary" (click)="toggleCreateForm()">
-      {{ showCreateForm ? "Cancel" : "Create Task List" }}
+    <button class="btn btn-primary w-100" (click)="toggleCreateForm()">
+      {{ showCreateForm ? "Cancelar" : "Crear Nueva Lista de Tareas" }}
     </button>
   </div>
 
@@ -15,12 +15,12 @@
 
   <div *ngIf="!showCreateForm">
     <div *ngIf="taskLists.length === 0" class="text-center text-muted">
-      No task lists yet.
+      Sin Listas de Tareas
     </div>
 
     <div *ngFor="let list of taskLists" class="card mb-3 position-relative">
       <div
-        class="card-body"
+        class="card-body card-hover"
         (click)="goToTaskListDetail(list.id)"
         style="cursor: pointer; padding-right: 5rem"
       >
@@ -32,14 +32,14 @@
             <button
               class="btn btn-sm btn-outline-primary"
               (click)="startEditing(list, $event)"
-              title="Edit"
+              title="Editar"
             >
               <i class="bi bi-pencil"></i>
             </button>
             <button
               class="btn btn-sm btn-outline-danger"
               (click)="onDeleteTaskList(list.id); $event.stopPropagation()"
-              title="Delete"
+              title="Borrar"
             >
               <i class="bi bi-trash"></i>
             </button>
@@ -63,7 +63,9 @@
             </div>
           </div>
 
-          <small class="text-muted">{{ list.count }} tasks</small>
+          <small class="text-muted">
+            {{ list.count }} {{ list.count === 1 ? "Tarea" : "Tareas" }}
+          </small>
         </div>
 
         <ng-template #editForm>
@@ -78,26 +80,28 @@
               name="title"
               required
               class="form-control mb-1"
+              maxlength="255"
             />
             <textarea
               [(ngModel)]="editDescription"
               name="description"
               required
               class="form-control mb-1"
+              maxlength="255"
             ></textarea>
             <button
               type="submit"
               class="btn btn-sm btn-success me-2"
               (click)="$event.stopPropagation()"
             >
-              Save
+              Guardar
             </button>
             <button
               type="button"
               class="btn btn-sm btn-secondary"
               (click)="cancelEdit(); $event.stopPropagation()"
             >
-              Cancel
+              Cancelar
             </button>
           </form>
         </ng-template>
