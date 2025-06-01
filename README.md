@@ -21,7 +21,7 @@ Lo cree con el fin de ser un primer acercamiento a Spring Boot
    ```
 3. Crear y levantar los contenedores Docker
    ```bash
-   docker compose up 
+   docker-compose up -d
    ```
 
 Esto iniciará la API RESTful en el puerto 8080 y la base de datos PostgreSQL en el puerto 5432.
@@ -29,7 +29,7 @@ Esto iniciará la API RESTful en el puerto 8080 y la base de datos PostgreSQL en
 ### Test
 
 #### Postman
-Para probar la API, importa el archivo `RedditClone.postman_collection.json` en Postman.
+Para probar la API, importa el archivo `TaskTracker.postman_collection.json` en Postman.
 Desde allí podrás ejecutar las distintas solicitudes para verificar el funcionamiento de los endpoints.
 
 #### Frontend
