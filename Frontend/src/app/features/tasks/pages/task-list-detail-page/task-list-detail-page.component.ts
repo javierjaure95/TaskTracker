@@ -63,10 +63,9 @@ export class TaskListDetailPageComponent implements OnInit {
     });
   }
 
-    ngOnDestroy() {
+  ngOnDestroy() {
     this.subscription.unsubscribe();
   }
-
 
   goBack() {
     this.router.navigate(['/tasks']);
@@ -154,6 +153,9 @@ export class TaskListDetailPageComponent implements OnInit {
         .updateTask(this.taskListId, updatedTask.id, updatedTask)
         .subscribe({
           next: (task) => {
+            if (!this.tasks) {
+              this.tasks = [];
+            }
             this.tasks = this.tasks.map((t) => (t.id === task.id ? task : t));
             this.taskBeingEdited = null;
             this.showCreateForm = false;
@@ -165,6 +167,9 @@ export class TaskListDetailPageComponent implements OnInit {
     } else {
       this.taskService.createTask(this.taskListId, formattedData).subscribe({
         next: (createdTask) => {
+          if (!this.tasks) {
+            this.tasks = [];
+          }
           this.tasks.push(createdTask);
           this.showCreateForm = false;
           if (this.taskList) {
