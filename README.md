@@ -16,7 +16,7 @@ El proyecto esta en desarrollo y se le agregaran nuevas funcionalidades
    ```bash
    git clone https://github.com/javierjaure95/TaskTracker.git
    ```
-2. Una vez dentro de la carpeta:
+2. Entrar a la carpeta:
    ```bash
    cd TaskTracker/tasktracker
    ```
@@ -48,10 +48,11 @@ Para iniciar el frontend:
    ```
 2. Una vez dentro de la carpeta:
    ```bash
-   cd Frontend
+   cd TaskTracker/Frontend
    ```
 3. Levantar el frontend
    ```bash
+   npm install
    npm start
    ```
 Esto iniciará el frontend en el puerto 4200.
