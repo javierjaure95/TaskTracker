@@ -1,10 +1,10 @@
 {
 	"info": {
-		"_postman_id": "97d72d4f-0717-45a8-b71c-c109c950db35",
+		"_postman_id": "f3d1a66b-ac76-44a1-8d80-540b4ed28e1d",
 		"name": "TaskTracker",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "45345911",
-		"_collection_link": "https://javier-5419377.postman.co/workspace/Javier's-Workspace~458fe5ab-fb84-4c08-8a32-b3897f9763dc/collection/45345911-97d72d4f-0717-45a8-b71c-c109c950db35?action=share&source=collection_link&creator=45345911"
+		"_collection_link": "https://javier-5419377.postman.co/workspace/Javier's-Workspace~458fe5ab-fb84-4c08-8a32-b3897f9763dc/collection/45345911-f3d1a66b-ac76-44a1-8d80-540b4ed28e1d?action=share&source=collection_link&creator=45345911"
 	},
 	"item": [
 		{
@@ -51,7 +51,7 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test(\"Status code is 200 or 400\", function () {\r",
+									"pm.test(\"Status code is 201 or 400\", function () {\r",
 									"    pm.expect(pm.response.code).to.be.oneOf([200, 400]);\r",
 									"});\r",
 									""
@@ -248,7 +248,7 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test(\"Status code is 200 or 400\", function () {\r",
+									"pm.test(\"Status code is 201 or 400\", function () {\r",
 									"    pm.expect(pm.response.code).to.be.oneOf([200, 400]);\r",
 									"});\r",
 									""
