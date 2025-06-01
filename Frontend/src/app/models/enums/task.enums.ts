@@ -6,5 +6,5 @@ export enum TaskPriority {
 
 export enum TaskStatus {
   OPEN = 'OPEN',
-  COMPLETED = 'COMPLETED'
+  COMPLETED = 'CLOSED'
 }

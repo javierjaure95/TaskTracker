@@ -6,9 +6,15 @@
       type="text"
       formControlName="title"
       class="form-control"
-      [class.is-invalid]="form.get('title')?.invalid && form.get('title')?.touched"
+      [class.is-invalid]="
+        form.get('title')?.invalid && form.get('title')?.touched
+      "
+      maxlength="255"
     />
-    <div *ngIf="form.get('title')?.invalid && form.get('title')?.touched" class="invalid-feedback">
+    <div
+      *ngIf="form.get('title')?.invalid && form.get('title')?.touched"
+      class="invalid-feedback"
+    >
       Title is required.
     </div>
   </div>
@@ -19,12 +25,22 @@
       id="description"
       formControlName="description"
       class="form-control"
-      [class.is-invalid]="form.get('description')?.invalid && form.get('description')?.touched"
+      [class.is-invalid]="
+        form.get('description')?.invalid && form.get('description')?.touched
+      "
+      maxlength="255"
     ></textarea>
-    <div *ngIf="form.get('description')?.invalid && form.get('description')?.touched" class="invalid-feedback">
+    <div
+      *ngIf="
+        form.get('description')?.invalid && form.get('description')?.touched
+      "
+      class="invalid-feedback"
+    >
       Description is required.
     </div>
   </div>
 
-  <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Create</button>
+  <button type="submit" class="btn btn-primary" [disabled]="form.invalid">
+    Create
+  </button>
 </form>

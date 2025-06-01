@@ -1,22 +1,29 @@
-<div class="container mt-4">
+<div class="container my-4">
   <button class="btn btn-secondary mb-3" (click)="goBack()">
     ← Back to Task Lists
   </button>
 
   <div *ngIf="taskList">
-    <h2 class="mb-3">{{ taskList.title }}</h2>
-    <p>{{ taskList.description }}</p>
+    <div class="container">
+      <h2 class="mb-3 text-break">{{ taskList.title }}</h2>
+      <p
+        class="text-break"
+        style="max-width: 100%; word-wrap: break-word; white-space: pre-wrap"
+      >
+        {{ taskList.description }}
+      </p>
+    </div>
 
-    <div class="progress mb-3">
+    <div class="progress mb-3" *ngIf="taskList.count > 0">
       <div
         class="progress-bar"
         role="progressbar"
-        [style.width.%]="taskList.progress"
-        [attr.aria-valuenow]="taskList.progress"
+        [style.width.%]="taskList.progress * 100"
+        [attr.aria-valuenow]="taskList.progress * 100"
         aria-valuemin="0"
         aria-valuemax="100"
       >
-        {{ taskList.progress }}%
+        {{ taskList.progress * 100 | number : "1.0-0" }}%
       </div>
     </div>
 
@@ -26,47 +33,31 @@
       </button>
     </div>
 
-    <app-create-task-form
+    <app-task-form
       *ngIf="showCreateForm"
-      (submitTask)="onCreateTask($event)"
-      (cancel)="toggleCreateForm()"
-    ></app-create-task-form>
-
-    <div *ngIf="tasks.length === 0 && !showCreateForm" class="text-center text-muted">
-      No tasks available.
+      [initialData]="taskBeingEdited"
+      (submitTask)="onSubmitTaskForm($event)"
+    ></app-task-form>
+    <div *ngIf="isLoaded">
+      <div
+        *ngIf="tasks.length === 0 && !showCreateForm"
+        class="text-center text-muted"
+      >
+        No tasks available.
+      </div>
+      <div *ngIf="tasks.length !== 0 && !showCreateForm">
+        <app-task-table
+          [tasks]="tasks"
+          [showCreateForm]="showCreateForm"
+          (editTask)="onClickEdit($event)"
+          (deleteTask)="onDeleteTask($event)"
+          (toggleStatus)="onToggleStatus($event)"
+        ></app-task-table>
+      </div>
     </div>
-    <table *ngIf="tasks.length > 0 && !showCreateForm" class="table table-bordered mt-3">
-      <thead class="table-light">
-        <tr>
-          <th>Done</th>
-          <th>Title</th>
-          <th>Description</th>
-          <th>Due Date</th>
-          <th>Priority</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let task of tasks">
-          <td>
-            <input
-              type="checkbox"
-              [checked]="task.status === 'COMPLETED'"
-              disabled
-            />
-          </td>
-          <td>{{ task.title }}</td>
-          <td>{{ task.description }}</td>
-          <td>{{ task.dueDate | date : "mediumDate" }}</td>
-          <td>{{ task.priority }}</td>
-          <td>
-            <button class="btn btn-sm btn-outline-secondary me-1">Edit</button>
-            <button class="btn btn-sm btn-outline-danger">Delete</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
 
-  <div *ngIf="!taskList && !showCreateForm" class="alert alert-danger">Task list not found.</div>
+    <div *ngIf="!taskList && !showCreateForm" class="alert alert-danger">
+      Task list not found.
+    </div>
+  </div>
 </div>

@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { TaskListService } from '../../../../services/task-list.service';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { TaskListCreateDto } from '../../../../models/task-list-create.dto';
 
 @Component({
   selector: 'app-task-list-page',
@@ -45,7 +46,7 @@ export class TaskListPageComponent implements OnInit {
     this.showCreateForm = !this.showCreateForm;
   }
 
-  onCreateTaskList(data: { title: string; description: string }) {
+  onCreateTaskList(data: TaskListCreateDto) {
     this.taskListService.createTaskList(data).subscribe({
       next: (createdTaskList) => {
         console.log('Task List creado:', createdTaskList);
