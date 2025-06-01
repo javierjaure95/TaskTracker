@@ -48,10 +48,11 @@ Para iniciar el frontend:
    ```
 2. Una vez dentro de la carpeta:
    ```bash
-   cd Frontend
+   cd TaskTracker/Frontend
    ```
 3. Levantar el frontend
    ```bash
+   npm install
    npm start
    ```
 Esto iniciará el frontend en el puerto 4200.
