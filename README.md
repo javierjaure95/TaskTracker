@@ -1,15 +1,15 @@
-## ForoClone 
+# TaskTracker
 
-### Descripción
-Este proyecto es un clon de Reddit, permite crear comunidades, publicar en ellas, comentar publicaciones y votar posts/comentarios.
-Lo cree con el fin de ser un primer acercamiento a Spring Boot
+## Descripción
+Este proyecto es una aplicación para gestionar tareas, donde puedes crear listas de tareas y controlar el progreso de cada una.
+Fue desarrollado como una introducción práctica a Spring Boot, enfocándome en la creación de APIs REST y la gestión de datos.
 
-### Tecnologías Utilizadas
+## Tecnologías Utilizadas
 - Lenguaje: Java 21
 - Framework: Spring Boot 3.5.0
 - Base de Datos: PostgreSQL
 
-### Implementación
+## Implementación
 
 1. Clonar el repositorio:  
    ```bash
@@ -26,18 +26,18 @@ Lo cree con el fin de ser un primer acercamiento a Spring Boot
 
 Esto iniciará la API RESTful en el puerto 8080 y la base de datos PostgreSQL en el puerto 5432.
 
-### Test
+## Test
 
-#### Postman
+### Postman
 Para probar la API, importa el archivo `TaskTracker.postman_collection.json` en Postman.
 Desde allí podrás ejecutar las distintas solicitudes para verificar el funcionamiento de los endpoints.
 
-#### Frontend
+### Frontend
 
 También se creó un Frontend para probar las funcionalidad, el Frontend fue desarrollado en Angular 17 
 y Boostrap 5. 
 
-##### Implementación
+#### Implementación
 
 Para iniciar el frontend:
 
