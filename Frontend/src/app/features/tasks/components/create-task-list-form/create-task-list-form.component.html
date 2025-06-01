@@ -1,1 +1,5 @@
-<p>create-task-list-form works!</p>
+<form (submit)="onSubmit(); $event.preventDefault()">
+  <input type="text" [(ngModel)]="title" placeholder="Title" name="title" required />
+  <textarea [(ngModel)]="description" placeholder="Description" name="description"></textarea>
+  <button type="submit">Create Task List</button>
+</form>

@@ -1,1 +1,39 @@
-<p>task-list-page works!</p>
+<div class="container mt-4">
+  <h1 class="text-center mb-4">Task List</h1>
+
+  <div class="d-flex justify-content-end mb-3">
+    <button class="btn btn-primary" (click)="toggleCreateForm()">
+      {{ showCreateForm ? 'Cancel' : 'Create Task List' }}
+    </button>
+  </div>
+
+  <div *ngIf="showCreateForm" class="mb-4">
+    <app-task-list-form (create)="onCreateTaskList($event)"></app-task-list-form>
+  </div>
+  <div *ngIf="!showCreateForm">
+    <div *ngIf="taskLists.length === 0" class="text-center text-muted">
+      No task lists yet.
+    </div>
+
+    <div *ngFor="let list of taskLists" class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title">{{ list.title }}</h5>
+        <p class="card-text">{{ list.description }}</p>
+
+        <div class="progress mb-2">
+          <div
+            class="progress-bar"
+            role="progressbar"
+            [style.width.%]="list.progress"
+            [attr.aria-valuenow]="list.progress"
+            aria-valuemin="0"
+            aria-valuemax="100"
+          >
+            {{ list.progress }}%
+          </div>
+        </div>
+        <small class="text-muted">{{ list.count }} tasks</small>
+      </div>
+    </div>
+  </div>
+</div>
