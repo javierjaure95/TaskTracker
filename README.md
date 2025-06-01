@@ -13,7 +13,7 @@ Fue desarrollado como una introducción práctica a Spring Boot, enfocándome en
 
 1. Clonar el repositorio:  
    ```bash
-   git clone https://github.com/javierjaure95/TastTracker.git
+   git clone https://github.com/javierjaure95/TaskTracker.git
    ```
 2. Una vez dentro de la carpeta:
    ```bash
@@ -43,7 +43,7 @@ Para iniciar el frontend:
 
 1. Clonar el repositorio:  
    ```bash
-   git clone https://github.com/javierjaure95/TastTracker.git
+   git clone https://github.com/javierjaure95/TaskTracker.git
    ```
 2. Una vez dentro de la carpeta:
    ```bash
