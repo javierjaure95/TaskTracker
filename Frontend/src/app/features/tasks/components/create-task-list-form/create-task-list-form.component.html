@@ -1,5 +1,30 @@
-<form (submit)="onSubmit(); $event.preventDefault()">
-  <input type="text" [(ngModel)]="title" placeholder="Title" name="title" required />
-  <textarea [(ngModel)]="description" placeholder="Description" name="description"></textarea>
-  <button type="submit">Create Task List</button>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="mb-3">
+    <label for="title" class="form-label">Title</label>
+    <input
+      id="title"
+      type="text"
+      formControlName="title"
+      class="form-control"
+      [class.is-invalid]="form.get('title')?.invalid && form.get('title')?.touched"
+    />
+    <div *ngIf="form.get('title')?.invalid && form.get('title')?.touched" class="invalid-feedback">
+      Title is required.
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label for="description" class="form-label">Description</label>
+    <textarea
+      id="description"
+      formControlName="description"
+      class="form-control"
+      [class.is-invalid]="form.get('description')?.invalid && form.get('description')?.touched"
+    ></textarea>
+    <div *ngIf="form.get('description')?.invalid && form.get('description')?.touched" class="invalid-feedback">
+      Description is required.
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Create</button>
 </form>

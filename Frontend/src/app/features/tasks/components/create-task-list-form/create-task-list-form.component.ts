@@ -1,21 +1,29 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-
+import { ReactiveFormsModule, FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-task-list-form',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './create-task-list-form.component.html'
 })
 export class TaskListFormComponent {
-  @Input() title: string = '';
-  @Input() description: string = '';
   @Output() create = new EventEmitter<{ title: string; description: string }>();
 
+  form: FormGroup;
+
+  constructor(private fb: FormBuilder) {
+    this.form = this.fb.group({
+      title: ['', Validators.required],
+      description: ['', Validators.required],
+    });
+  }
 
   onSubmit() {
-    this.create.emit({ title: this.title, description: this.description });
+    if (this.form.valid) {
+      this.create.emit(this.form.value);
+      this.form.reset();
+    }
   }
 }

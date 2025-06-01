@@ -39,9 +39,16 @@ export class TaskListPageComponent implements OnInit {
   }
 
   onCreateTaskList(data: { title: string; description: string }) {
-    console.log('Datos recibidos para crear Task List:', data);
-    this.showCreateForm = false;
-    // Aquí luego se puede agregar la llamada para crear en backend
+    this.taskListService.createTaskList(data).subscribe({
+      next: (createdTaskList) => {
+        console.log('Task List creado:', createdTaskList);
+        this.showCreateForm = false;
+        this.loadTaskLists(); 
+      },
+      error: (err) => {
+        console.error('Error creando task list:', err);
+      }
+    });
   }
 
   goToTaskListDetail(id: string) {
